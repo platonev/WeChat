@@ -1,7 +1,6 @@
 'use strict';
 const { ipcRenderer, webFrame } = require('electron');
 const MenuHandler = require('../handlers/menu');
-const MentionMenu = require('./mention_menu');
 const BadgeCount = require('./badge_count');
 const Common = require('../common');
 
@@ -39,7 +38,6 @@ class Injector {
           $rootScope.$on('newLoginPage', () => {
             ipcRenderer.send('user-logged', '');
           });
-          $rootScope.mentionMenu = MentionMenu.inject;
         }]);
         return angularBootstrapReal.apply(angular, arguments);
       } : angularBootstrapReal,
@@ -53,7 +51,6 @@ class Injector {
         return setTimeout(initModules, 3000);
       }
 
-      MentionMenu.init();
       BadgeCount.init();
     };
 
@@ -116,7 +113,7 @@ class Injector {
     if (optionMenuReg.test(value)) {
       value = value.replace(optionMenuReg, 'optionMenu();');
     } else if (messageBoxKeydownReg.test(value)) {
-      value = value.replace(messageBoxKeydownReg, 'editAreaKeydown($event);mentionMenu($event);');
+      value = value.replace(messageBoxKeydownReg, 'editAreaKeydown($event);');
     }
     return value;
   }
