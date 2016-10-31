@@ -13,7 +13,7 @@ class AppTray {
   constructor(splashWindow, wechatWindow) {
     this.splashWindow = splashWindow;
     this.wechatWindow = wechatWindow;
-    this.TRAY_CONFIG_PATH = path.join(app.getPath('appData'),'electronic-wechat/trayConfig.json');
+    this.TRAY_CONFIG_PATH = path.join(app.getPath('appData'),'wechat/trayConfig.json');
     this.lastUnreadStat = 0;
 
     fs.readFile(this.TRAY_CONFIG_PATH, (err, data) => {
